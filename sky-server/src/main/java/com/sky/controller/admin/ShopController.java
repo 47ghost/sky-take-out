@@ -1,0 +1,44 @@
+package com.sky.controller.admin;
+
+
+import com.sky.result.Result;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.web.bind.annotation.*;
+
+@RestController("adminShopController")
+@RequestMapping("admin/shop")
+@Tag(name = "店铺状态接口")
+@Slf4j
+public class ShopController {
+
+    public static final String KEY = "SHOP_STATUS";
+
+    @Autowired
+    private RedisTemplate<String,Object> redisTemplate;
+
+    @PutMapping("/{status}")
+    @Operation(summary = "设置店铺的营业状态")
+    public Result<Void> setStatus(@PathVariable Integer status){
+        log.info("设置店铺的营业状态为：{}",status == 1 ? "营业中" : "打烊中");
+        redisTemplate.opsForValue().set(KEY,status);
+        return Result.success();
+    }
+
+    @GetMapping("/status")
+    @Operation(summary = "获取店铺的营业状态")
+    public Result<Integer> getStatus(){
+        Integer status = (Integer) redisTemplate.opsForValue().get(KEY);
+        if (status == null) {
+            log.info("店铺状态未设置，默认为营业中");
+            status = 1;
+        } else {
+            log.info("获取到店铺的营业状态为：{}", status == 1 ? "营业中" : "打烊中");
+        }
+        return Result.success(status);
+    }
+
+}

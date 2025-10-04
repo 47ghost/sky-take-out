@@ -1,0 +1,65 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-circular-references: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sky_take_out
+    username: root
+  jpa:
+    open-in-view: false
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 30MB
+      enabled: true
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      database: 0
+
+
+
+logging:
+  pattern:
+    console: "%d{HH:mm:ss} [%level] [%logger] %msg%n"
+  level:
+    com:
+      sky:
+        mapper: debug
+        service: info
+        controller: info
+
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+  packages-to-scan: com.sky.controller
+
+
+sky:
+  jwt:
+    # 设置jwt过期时间
+    admin-ttl: 2592000000
+    # 设置前端传递过来的令牌名称
+    admin-token-name: token
+    user-token-name: authentication
+    user-ttl: 2592000000
+  security:
+    permit-urls:
+      - /admin/employee/login
+      - /v3/api-docs/**
+      - /swagger-ui/**
+      - /error
+      - /webservers/ws/f3njrag450i
+      - /user/user/**
+      - /user/shop/status
+      - /ws/**
+

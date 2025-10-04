@@ -1,0 +1,32 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: prod
+  main:
+    allow-circular-references: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # url: jdbc:mysql://localhost:3306/sky_take_out?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8
+    # username: root
+    # password:
+  data:
+    redis:
+      # host: 127.0.0.1
+      # port: 6379
+      # database: 0
+      # password:
+
+sky:
+  jwt:
+    # admin-secret-key:
+    # user-secret-key:
+  alioss:
+    # endpoint:
+    # bucket-name:
+    # access-key-id:
+    # access-key-secret:
+  wechat:
+    # appid:
+    # secret:
