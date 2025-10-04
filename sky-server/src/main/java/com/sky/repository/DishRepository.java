@@ -34,4 +34,6 @@ public interface DishRepository extends JpaRepository<Dish,Long> {
     List<Dish> findByCategoryId(Long categoryId);
 
     List<Dish> findByCategoryIdAndStatus(Long categoryId, Integer status);
+
+    long countByStatus(Integer status);
 }

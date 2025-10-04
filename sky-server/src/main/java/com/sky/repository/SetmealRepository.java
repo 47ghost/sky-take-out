@@ -23,4 +23,6 @@ public interface SetmealRepository extends JpaRepository<Setmeal,Long> {
     void deleteByIdIn(List<Long> ids);
 
     List<Setmeal> findByCategoryIdAndStatus(Long categoryId, Integer status);
+
+    long countByStatus(Integer status);
 }
