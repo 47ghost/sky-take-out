@@ -1,10 +1,7 @@
 package com.sky.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -30,6 +27,7 @@ public class OrderDetail implements Serializable {
     private String name;
 
     //订单id
+    @Column(name = "order_id")
     private Long orderId;
 
     //菜品id
